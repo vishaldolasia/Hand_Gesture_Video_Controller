@@ -49,6 +49,11 @@ The core of the project is the `count_fingers` function, which determines the nu
 
 1.  **Dynamic Thresholding:** For the Index, Middle, Ring, and Pinky fingers, the "up" status is determined by comparing the distance between the finger's **MCP joint** (base) and its **Tip** along the **Y-axis** against a calculated threshold. The threshold is defined as half the vertical distance between the wrist (0) and the central MCP joint (9). This dynamic approach adapts to hand size and camera distance.
 2.  **Thumb Check:** The thumb's status is checked separately using a fixed **X-axis** distance threshold (5) between the **Thumb Tip (4)** and the **Index MCP Joint (5)**.
+   
+<img width="485" height="442" alt="landmarks" src="https://github.com/user-attachments/assets/924efe2f-245b-44e6-90ed-b89216967731" />
+<img width="485" height="442" alt="threshold" src="https://github.com/user-attachments/assets/07f860da-bf24-406f-a54a-61c810e6cc6c" />
+<img width="485" height="442" alt="y axis" src="https://github.com/user-attachments/assets/9576dfb0-22a1-47de-a7d3-b3aeb1a171ef" />
+<img width="485" height="442" alt="x axis" src="https://github.com/user-attachments/assets/2e3e7f84-c2f0-425f-a625-328c61262cc4" />
 
 ### Addressing Stability Issues
 
