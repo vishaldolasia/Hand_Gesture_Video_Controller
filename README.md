@@ -27,7 +27,7 @@ This project implements a real-time **Hand Gesture Control System** using comput
 
 1.  **Run the script:**
     ```bash
-    python your_script_name.py
+    python main.py
     ```
 2.  A webcam window named "window" will open. Position your hand clearly in front of the camera.
 3.  Perform the gestures shown below to control your device.
@@ -37,17 +37,28 @@ This project implements a real-time **Hand Gesture Control System** using comput
 
 | Finger Count | Gesture Description | Key Press Action | Common Use Case |
 | :----------: | :--- | :--------: | :------- |
-| 1 | Index finger up | `right` | Next slide, Forward skip |
-| 2 | Index and Middle up | `left` | Previous slide, Rewind |
-| 3 | Index, Middle, Ring up | `up` | Scroll up, Volume up |
-| 4 | All fingers except Thumb up | `down` | Scroll down, Volume down |
-| 5 | All five fingers up | `space` | Play/Pause, Select |
+| 1 | Index finger up | `right` | Forward skip 5/10 seconds |
+| 2 | Index and Middle up | `left` | Rewind 5/10 seconds |
+| 3 | Index, Middle, Ring up | `up` | Volume up |
+| 4 | All fingers except Thumb up | `down` |  Volume down |
+| 5 | All five fingers up | `space` | Play/Pause |
 
 ## 🧠 Implementation Logic
 
 The core of the project is the `count_fingers` function, which determines the number of extended fingers using specific hand landmarks .
 
-1.  **Dynamic Thresholding:** For the Index, Middle, Ring, and Pinky fingers, the "up" status is determined by comparing the distance between the finger's **MCP joint** (base) and its **Tip** along the **Y-axis** against a calculated threshold. The threshold is defined as half the vertical distance between the wrist (0) and the central MCP joint (9). This dynamic approach adapts to hand size and camera distance.
+1.  **Dynamic Thresholding:** The "up" status for each finger is determined by comparing the vertical distance (along the Y-axis) between the base joint and the tip of the finger against a dynamic threshold. This threshold is defined as half the vertical distance between the wrist (landmark 0) and the central MCP joint (landmark 9), which helps adapt the detection to the user's hand size and position.
+
+The specific landmarks used for calculation are as follows:
+
+a. Index Finger: The vertical distance between the 5th landmark (MCP joint/base) and the 8th landmark (Tip) is calculated.
+
+b. Middle Finger: The vertical distance between the 9th landmark (MCP joint/base) and the 12th landmark (Tip) is calculated.
+
+c. Ring Finger: The vertical distance between the 13th landmark (MCP joint/base) and the 16th landmark (Tip) is calculated.
+
+d. Pinky Finger: The vertical distance between the 17th landmark (MCP joint/base) and the 20th landmark (Tip) is calculated.
+
 2.  **Thumb Check:** The thumb's status is checked separately using a fixed **X-axis** distance threshold (5) between the **Thumb Tip (4)** and the **Index MCP Joint (5)**.
    
 <img width="485" height="442" alt="landmarks" src="https://github.com/user-attachments/assets/924efe2f-245b-44e6-90ed-b89216967731" />
